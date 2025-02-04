@@ -95,6 +95,7 @@ Before proceeding, make sure you have:
 ```sh
 chmod 400 my-keypair.pem
 ssh -i my-keypair.pem ec2-user@<Public-IP>
+```
 
 ---
 
