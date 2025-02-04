@@ -97,7 +97,8 @@ chmod 400 my-keypair.pem
 ssh -i my-keypair.pem ec2-user@<Public-IP>
 
 # 2️⃣ Deploy Using **AWS CLI**
-🔹 Run the following commands, replacing **IDs** as needed.
+
+Run the following commands, replacing **IDs** as needed.
 
 ## 🏗️ Step 1: Create VPC
 ```sh
