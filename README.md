@@ -96,14 +96,16 @@ Before proceeding, make sure you have:
 chmod 400 my-keypair.pem
 ssh -i my-keypair.pem ec2-user@<Public-IP>
 
-# 2️⃣ Deploy Using **AWS CLI**
+---
 
-Run the following commands, replacing **IDs** as needed.
+# 2️⃣ Deploy Using **AWS CLI**
+🔹 Run the following commands, replacing **IDs** as needed.
 
 ## 🏗️ Step 1: Create VPC
 ```sh
 aws ec2 create-vpc --cidr-block 10.0.0.0/16 --tag-specifications 'ResourceType=vpc,Tags=[{Key=Name,Value=my-vpc}]'
-```
+
+
 ## 📡 Step 2: Create Public Subnet
 ```sh
 aws ec2 create-subnet --vpc-id <vpc-id> --cidr-block 10.0.1.0/24 --availability-zone us-east-1a
