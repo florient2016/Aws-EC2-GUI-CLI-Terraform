@@ -158,35 +158,35 @@ provider "aws" {
 }
 
 # Create VPC
-resource "aws_vpc" "my_vpc" {
+resource "aws_vpc" "ocp_vpc" {
   cidr_block = "10.0.0.0/16"
   tags = {
-    Name = "my-vpc"
+    Name = "ocp-vpc"
   }
 }
 
 # Create Public Subnet
 resource "aws_subnet" "public_subnet" {
-  vpc_id                  = aws_vpc.my_vpc.id
+  vpc_id                  = aws_vpc.ocp_vpc.id
   cidr_block              = "10.0.1.0/24"
   availability_zone       = "us-east-1a"
   map_public_ip_on_launch = true
   tags = {
-    Name = "public-subnet"
+    Name = "ocp-subnet"
   }
 }
 
 # Create Internet Gateway
 resource "aws_internet_gateway" "igw" {
-  vpc_id = aws_vpc.my_vpc.id
+  vpc_id = aws_vpc.ocp_vpc.id
   tags = {
-    Name = "my-igw"
+    Name = "ocp-igw"
   }
 }
 
 # Create Route Table
 resource "aws_route_table" "public_rt" {
-  vpc_id = aws_vpc.my_vpc.id
+  vpc_id = aws_vpc.ocp_vpc.id
   tags = {
     Name = "public-route-table"
   }
@@ -209,7 +209,7 @@ resource "aws_route_table_association" "public_association" {
 resource "aws_security_group" "ssh_sg" {
   name        = "ssh-access"
   description = "Allow SSH access"
-  vpc_id      = aws_vpc.my_vpc.id
+  vpc_id      = aws_vpc.ocp_vpc.id
 
   ingress {
     description = "SSH Access"
@@ -240,7 +240,7 @@ variable "key_name" {
 
 # Launch Amazon Linux Instance
 resource "aws_instance" "amazon_linux" {
-  ami                         = "ami-0abcdef1234567890"  # Replace with the correct Amazon Linux 2 AMI ID
+  ami                         = "ami-0c614dee691cbbf37"  # Replace with the correct Amazon Linux 2 AMI ID
   instance_type               = "t2.micro"
   key_name                    = var.key_name
   subnet_id                   = aws_subnet.public_subnet.id
@@ -255,13 +255,14 @@ resource "aws_instance" "amazon_linux" {
 # Output the public IP of the instance
 output "instance_public_ip" {
   description = "The public IP of the Amazon Linux instance"
-  value       = aws_instance.amazon_linux.public_ip
+  value       = "ssh -i my-keypair.pem ec2-user@${aws_instance.amazon_linux.public_ip}"
 }
 ```
 
 ## 🏁 Terraform Commands
 ```sh
 terraform init
+terraform plan
 terraform apply
 ```
 
