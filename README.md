@@ -27,6 +27,11 @@ Before proceeding, make sure you have:
 | **Terraform Installed** | [Install Terraform](https://developer.hashicorp.com/terraform/downloads) |
 | **Configured AWS CLI Credentials** | Run `aws configure` |
 
+
+---
+## 🏗️ Architecture
+
+![Architecture Diagram](architecture.png)
 ---
 
 # 1️⃣ Deploy Using **AWS Management Console (GUI)**
