@@ -105,7 +105,7 @@ ssh -i my-keypair.pem ec2-user@<Public-IP>
 ## 🏗️ Step 1: Create VPC
 ```sh
 aws ec2 create-vpc --cidr-block 10.0.0.0/16 --tag-specifications 'ResourceType=vpc,Tags=[{Key=Name,Value=my-vpc}]'
-
+```
 
 ## 📡 Step 2: Create Public Subnet
 ```sh
@@ -123,11 +123,9 @@ aws ec2 associate-route-table --subnet-id <subnet-id> --route-table-id <rtb-id>
 ## 🔐 Step 4: Create Security Group for SSH Access
 ```sh
 aws ec2 create-security-group --group-name ssh-access --description "Allow SSH access" --vpc-id <vpc-id>
-
-aws ec2 authorize-security-group-ingress \
-    --group-id <sg-id> \
-    --protocol tcp --port 22 \
-    --cidr 0.0.0.0/0
+```
+```sh
+aws ec2 authorize-security-group-ingress --group-id <sg-id> --protocol tcp --port 22 --cidr 0.0.0.0/0
 ```
 ## 🔑 Step 4: Create Key Pair
 ```sh
@@ -137,7 +135,7 @@ chmod 400 my-keypair.pem
 ## 🖥️ Step 5: Launch Amazon Linux Instance
 ```sh
 aws ec2 run-instances \
-    --image-id ami-0abcdef1234567890 \
+    --image-id ami-0c614dee691cbbf37 \
     --count 1 \
     --instance-type t2.micro \
     --key-name my-keypair \
